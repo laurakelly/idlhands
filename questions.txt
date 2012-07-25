@@ -1,0 +1,5 @@
+- how to connect users to a show
+- is there a url format or just charfield
+- how to deal with addresses
+- how django deals with password encryption
+- is there a boolean format for models.?
