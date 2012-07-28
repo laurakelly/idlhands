@@ -3,11 +3,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'idlhands.views.home', name='home'),
+    url(r'^$', 'idlhands_app.views.home', name='home'),
     # url(r'^idlhands/', include('idlhands.foo.urls')),
-
-
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^(?P<username>\w+)/$', 'idlhands_app.views.user'),
+#    url(r'^idlhands/(?P<>\d+/$)', 'idlhands_app.views.project'),
 )

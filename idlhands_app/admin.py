@@ -8,20 +8,20 @@ class ImageInline(admin.StackedInline):
     model = Image
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ['username', 'password', 'user_since','info', 'email', 'website', 'trendsetter', 'gallery', 'avatar']
+    fields = ['username', 'password','info', 'email', 'website', 'trendsetter', 'gallery', 'avatar']
     inlines = [ProjectInline]
-    list_display = ('username', )
+#    list_display = (['username', 'user_since'])
 
 admin.site.register(User, UserAdmin)
 
 class ProjectAdmin(admin.ModelAdmin):
-    fields = ['title','pub_date', 'update', 'artist']
+    fields = ['title', 'artist']
     inlines = [ImageInline]
 
 admin.site.register(Project, ProjectAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-    fields = ['title', 'artist', 'pub_date', 'project','tags', 'media', 'url']
+    fields = ['title', 'artist', 'project','tags', 'media', 'url']
 
 admin.site.register(Image, ImageAdmin)
 

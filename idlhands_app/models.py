@@ -14,6 +14,7 @@ class User(models.Model):
     gallery = models.BooleanField()
     avatar = models.URLField(max_length=200)
     user_since = models.DateField(auto_now_add=True)
+    location = models.CharField(max_length=200)
 #    fav_users = models.ManyToManyField('User')
 
 class Project(models.Model):
