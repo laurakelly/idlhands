@@ -13,8 +13,10 @@ def user(request,username):
     website = user.website
     trendsetter = user.trendsetter
     gallery = user.trendsetter
-    return render_to_response('profile.html',{'username':username, 'info':info, 'website':website, 'trendsetter':trendsetter,\
-                                 'gallery':gallery})
+    avatar = user.avatar
+    return render_to_response('profile.html',
+            {'username':username, 'info':info, 'website':website, \
+            'trendsetter':trendsetter,'gallery':gallery, 'avatar':avatar})
 
 def project(request,title):
     return HttpResponse("this project is called %s" %title)
