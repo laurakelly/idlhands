@@ -8,7 +8,7 @@ class ImageInline(admin.StackedInline):
     model = Image
 
 class UserAdmin(admin.ModelAdmin):
-    fields = ['username', 'password','info', 'email', 'website', 'trendsetter', 'gallery', 'avatar']
+    fields = ['username', 'password','info', 'email', 'website', 'location','trendsetter', 'gallery', 'avatar']
     inlines = [ProjectInline]
 #    list_display = (['username', 'user_since'])
 
