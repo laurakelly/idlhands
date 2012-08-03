@@ -19,13 +19,12 @@ h1 {
     text-align:right;
 }
 
-
 a{
-    color:#944DDB;
+    color:#4D1980;
 }
 
 a:visited {
-    color:#944DDB;
+    color:#4D1980;
 }
 
 li {
@@ -34,6 +33,7 @@ li {
 
 #search {
     margin-right:5px;
+    margin-left:10px;
     color:white;
     text-transform:uppercase;
 }
@@ -52,6 +52,11 @@ li {
 #logo {
     margin-right:30px;
     margin-bottom:-1px;
+}
+
+#nav_extra_space {
+    background-color:#4B4B4B;
+    margin-bottom:40px;
 }
 
 #nav {
@@ -75,11 +80,6 @@ li {
 
 }
 
-#nav_extra_space {
-    background-color:#4B4B4B;
-    margin-bottom:40px;
-}
-
 #nav a:visited {
     background-color:#4B4B4B;
 }
@@ -87,43 +87,6 @@ li {
 #nav a:hover{
     color:#1E1E1E;
     background-color:#E1E1E1;
-}
-
-#user_info{
-    margin:0px;
-}
-
-#user_info h2{
-    font-family: helvetica,arial;
-    text-transform:uppercase;
-    color:white;
-    margin:0px;
-    padding-left:5px;
-    padding-right:5px;
-    margin-bottom:5px;
-    border-bottom-style:solid;
-    border-color:white;
-    border-width: 2px;
-    display:block;
-    font-size:20px;
-}
-
-#user_info ul{
-    margin:0px;
-}
-
-#user_info .grid_6{
-    padding-top:6px;
-}
-
-#user_info .grid_12{
-    padding:40px 0px 40px 0px;
-}
-
-#gallery #line{
-    border-bottom-style:solid;
-    border-color:white;
-    border-width:2px;
 }
 
 #images img{
@@ -136,6 +99,6 @@ li {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top:60px;
+    margin-bottom: 60px;
     text-align:left;
 }

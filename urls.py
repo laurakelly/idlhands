@@ -8,5 +8,5 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<username>\w+)/$', 'idlhands_app.views.user'),
-#    url(r'^idlhands/(?P<>\d+/$)', 'idlhands_app.views.project'),
+    url(r'^(?P<username>\w+)/(?P<id>\d+)/$', 'idlhands_app.views.project'),
 )

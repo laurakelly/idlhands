@@ -15,13 +15,13 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.register(User, UserAdmin)
 
 class ProjectAdmin(admin.ModelAdmin):
-    fields = ['title', 'artist']
+    fields = ['title', 'artist', 'media', 'tags']
     inlines = [ImageInline]
 
 admin.site.register(Project, ProjectAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-    fields = ['title', 'artist', 'project','tags', 'media', 'url']
+    fields = ['title', 'artist', 'project','tags', 'url']
 
 admin.site.register(Image, ImageAdmin)
 
