@@ -1,0 +1,104 @@
+body {
+    min-width: 960px;
+    background-image:url("dirty_old_shirt.png");
+    margin-left:0px;
+    margin-right:0px;
+    font-family:Consolas,'Lucida Console','DejaVu Sans Mono',monospace;
+    color: #E1E1E1;
+}
+
+h1 {
+    font-family: helvetica,arial;
+    font-weight: bold;
+    text-align:right;
+    color: #A0C544;
+    background-color:#323232;
+    margin-top:0px;
+    margin-bottom:0px;
+    font-size: 90px;
+    text-align:right;
+}
+
+a{
+    color:#4D1980;
+}
+
+a:visited {
+    color:#4D1980;
+}
+
+li {
+    list-style:none;
+}
+
+#search {
+    margin-right:5px;
+    margin-left:10px;
+    color:white;
+    text-transform:uppercase;
+}
+
+#search input {
+    background-color:white;
+    border:solid 1px black;
+    height:18px;
+}
+
+#banner {
+    margin-top:10px;
+    background-color:#323232;
+}
+
+#logo {
+    margin-right:30px;
+    margin-bottom:-1px;
+}
+
+#nav_extra_space {
+    background-color:#4B4B4B;
+    margin-bottom:40px;
+}
+
+#nav {
+    margin:0px;
+    background-color: #4B4B4B;
+    height:30px;
+}
+
+#nav a {
+    margin-right:10px;
+    padding-right:10px;
+    padding-left:10px;
+    float:right;
+    background-color:#4B4B4B;
+    color: #FF9933;
+    text-decoration:none;
+    text-transform:uppercase;
+    text-align:center;
+    line-height: 30px;
+    display: block;
+
+}
+
+#nav a:visited {
+    background-color:#4B4B4B;
+}
+
+#nav a:hover{
+    color:#1E1E1E;
+    background-color:#E1E1E1;
+}
+
+#images img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#images .image_block{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+    text-align:left;
+}
