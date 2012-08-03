@@ -20,5 +20,11 @@ def user(request,username):
             'trendsetter':trendsetter,'gallery':gallery,\
             'avatar':avatar, 'location':location})
 
-def project(request,title):
-    return HttpResponse("this project is called %s" %title)
+def project(request,username,id):
+    project = Project.objects.get(id=id)
+    title = project.title
+    images = Image.objects.filter(project=id)
+    media = project.media
+    tags = project.tags
+    return render_to_response('project.html',{'title':title, \
+            'images':images, 'artist':username, 'tags':tags, 'media':media})

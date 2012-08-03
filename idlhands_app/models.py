@@ -26,6 +26,8 @@ class Project(models.Model):
     artist = models.ForeignKey('User')
     pub_date = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
+    media = models.CharField(max_length=140)
+    tags = models.CharField(max_length=140)
 
 
 class Image(models.Model):
@@ -38,7 +40,6 @@ class Image(models.Model):
     project = models.ForeignKey('Project')
     pub_date = models.DateTimeField(auto_now_add=True)
     tags = models.CharField(max_length=140)
-    media = models.CharField(max_length=140)
     url = models.URLField()
 
 # TODO: Add votes after Projects feature is working
