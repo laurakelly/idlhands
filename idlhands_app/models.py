@@ -40,7 +40,10 @@ class Image(models.Model):
     project = models.ForeignKey('Project')
     pub_date = models.DateTimeField(auto_now_add=True)
     tags = models.CharField(max_length=140)
-    url = models.URLField()
+    # url = models.URLField()
+    image = models.ImageField(upload_to="images", width_field="width", height_field="height", null=True)
+    width = models.IntegerField(null=True)
+    height = models.IntegerField(null=True)
 
 # TODO: Add votes after Projects feature is working
 

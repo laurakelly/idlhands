@@ -21,7 +21,7 @@ class ProjectAdmin(admin.ModelAdmin):
 admin.site.register(Project, ProjectAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-    fields = ['title', 'artist', 'project','tags', 'url']
+    fields = ['title', 'artist', 'project','tags', 'image']
 
 admin.site.register(Image, ImageAdmin)
 
