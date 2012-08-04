@@ -1,5 +1,5 @@
 from django.contrib import admin
-from idlhands_app.models import User, Image, Project, Vote, Date, Show
+from idlhands_app.models import UserProfile, User, Image, Project, Vote, Date, Show
 
 class ProjectInline(admin.StackedInline):
     model = Project
@@ -12,7 +12,7 @@ class UserAdmin(admin.ModelAdmin):
     inlines = [ProjectInline]
 #    list_display = (['username', 'user_since'])
 
-admin.site.register(User, UserAdmin)
+admin.site.register(UserProfile, UserAdmin)
 
 class ProjectAdmin(admin.ModelAdmin):
     fields = ['title', 'artist', 'media', 'tags']

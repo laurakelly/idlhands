@@ -1,10 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
+class UserProfile(models.Model):
     # Represent User objects as usernames when called in the shell
     def __unicode__(self):
         return self.username
+    # Connects UserProfile to User
+    user = models.OneToOneField(User)
 
+    # Profile Info
     password = models.CharField(max_length=64)
     info = models.TextField(max_length=200)
     username = models.CharField(unique=True, max_length=64)
@@ -23,7 +27,7 @@ class Project(models.Model):
         return self.title
 
     title = models.CharField(max_length=140)
-    artist = models.ForeignKey('User')
+    artist = models.ForeignKey('UserProfile')
     pub_date = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
     media = models.CharField(max_length=140)
@@ -36,7 +40,7 @@ class Image(models.Model):
         return self.title
 
     title = models.CharField(max_length=140)
-    artist = models.ForeignKey('User')
+    artist = models.ForeignKey('UserProfile')
     project = models.ForeignKey('Project')
     pub_date = models.DateTimeField(auto_now_add=True)
     tags = models.CharField(max_length=140)
@@ -48,7 +52,7 @@ class Image(models.Model):
 # TODO: Add votes after Projects feature is working
 
 class Vote(models.Model):
-    user = models.ForeignKey('User')
+    user = models.ForeignKey('UserProfile')
     image = models.ForeignKey('Image')
     date = models.DateTimeField(auto_now_add=True)
 
@@ -64,7 +68,7 @@ class Show(models.Model):
     opening_end = models.DateTimeField()
     exhibition_start = models.DateTimeField(null=True)### only if exhibition is true
     exhibition_end = models.DateTimeField(null=True)### only if exhibition is true
-    creator = models.ForeignKey('User')
+    creator = models.ForeignKey('UserProfile')
     description = models.TextField(max_length=1000)
     location_name = models.CharField(max_length=200)
     address1 = models.CharField(max_length=200)

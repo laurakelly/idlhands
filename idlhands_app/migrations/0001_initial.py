@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
+# encoding: utf-8
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
-
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        
         # Adding model 'User'
         db.create_table('idlhands_app_user', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -44,7 +44,9 @@ class Migration(SchemaMigration):
             ('project', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['idlhands_app.Project'])),
             ('pub_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('tags', self.gf('django.db.models.fields.CharField')(max_length=140)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=200)),
+            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True)),
+            ('width', self.gf('django.db.models.fields.IntegerField')(null=True)),
+            ('height', self.gf('django.db.models.fields.IntegerField')(null=True)),
         ))
         db.send_create_signal('idlhands_app', ['Image'])
 
@@ -86,6 +88,7 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        
         # Deleting model 'User'
         db.delete_table('idlhands_app_user')
 
@@ -114,12 +117,14 @@ class Migration(SchemaMigration):
         'idlhands_app.image': {
             'Meta': {'object_name': 'Image'},
             'artist': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['idlhands_app.User']"}),
+            'height': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True'}),
             'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['idlhands_app.Project']"}),
             'pub_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'tags': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '140'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'})
+            'width': ('django.db.models.fields.IntegerField', [], {'null': 'True'})
         },
         'idlhands_app.project': {
             'Meta': {'object_name': 'Project'},

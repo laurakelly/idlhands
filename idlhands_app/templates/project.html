@@ -2,10 +2,10 @@
 		"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<link rel="SHORTCUT ICON" href="../../static/arrow_green.png">
+	<link rel="SHORTCUT ICON" href="../../static/logos/arrow_green.png">
 	<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link rel=StyleSheet href="../../static/960_12_col.css">
-	<link rel=StyleSheet href="../../static/12col_project.css" type="text/css">
+	<link rel=StyleSheet href="../../static/stylesheets/960_12_col.css">
+	<link rel=StyleSheet href="../../static/stylesheets/12col_project.css" type="text/css">
 	<title>{{ title }}</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
 <div id="banner">
 	<div class="container_12">
 		<div class="grid_12">
-			<h1><img id="logo" src="../../static/arrow.png" width=70px height=70px/>IDL HANDS</h1>
+			<h1><img id="logo" src="../../static/logos/arrow.png" width=70px height=70px/>IDL HANDS</h1>
 		</div>
 	</div>
 </div>
@@ -46,7 +46,7 @@
 	<div id="gallery">
 		<div class="grid_9">
 			{% for image in images %}
-			<img src="{{ image.url }}">
+			<img src="../../static/{{ image.image }}">
 			{% endfor %}
 		</div>
 	</div>

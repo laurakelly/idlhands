@@ -1,20 +1,24 @@
 from django.template import Context, loader
-from idlhands_app.models import User, Project, Image
+from idlhands_app.models import UserProfile, Project, Image
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 
 def home(request):
     return render_to_response('home.html')
 
-def user(request,username):
+def user_profile(request,username):
     user = User.objects.get(username=username)
-    username = user.username
-    info = user.info
-    website = user.website
-    trendsetter = user.trendsetter
-    gallery = user.trendsetter
-    avatar = user.avatar
-    location = user.location
+    id = user.id
+    user_profile = UserProfile.objects.filter(user=id)
+
+    username = user_profile.username
+    info = user_profile.info
+    website = user_profile.website
+    trendsetter = user_profile.trendsetter
+    gallery = user_profile.trendsetter
+    avatar = user_profile.avatar
+    location = user_profile.location
     return render_to_response('profile.html',
             {'username':username, 'info':info, 'website':website, \
             'trendsetter':trendsetter,'gallery':gallery,\
