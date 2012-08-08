@@ -9,4 +9,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^(?P<username>\w+)/$', 'idlhands_app.views.user_profile'),
     url(r'^(?P<username>\w+)/(?P<id>\d+)/$', 'idlhands_app.views.project'),
+    url(r'^login', 'idlhands_app.views.login_page'),
+    url(r'^new', 'idlhands_app.views.new_user'),
+    url(r'^logout', 'idlhands_app.views.logout_page'),
 )

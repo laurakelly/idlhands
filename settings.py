@@ -144,3 +144,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_PROFILE_MODULE = 'idlhands_app.UserProfile'

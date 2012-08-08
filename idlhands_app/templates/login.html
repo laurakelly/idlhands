@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+		"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title></title>
+</head>
+	{% if invalid %}
+	<h1>Invalid username and/or password</h1>
+	{% endif %}
+	<form method="POST">
+		Email<input type="text" name="username"><br>
+		Password<input type="password" name="password">
+		<input type="submit">
+	</form>
+
+<body>
+
+</body>
+</html>

@@ -4,21 +4,20 @@ from django.contrib.auth.models import User
 class UserProfile(models.Model):
     # Represent User objects as usernames when called in the shell
     def __unicode__(self):
-        return self.username
+        return self.user.username
+
     # Connects UserProfile to User
     user = models.OneToOneField(User)
 
     # Profile Info
-    password = models.CharField(max_length=64)
-    info = models.TextField(max_length=200)
-    username = models.CharField(unique=True, max_length=64)
+    info = models.TextField(max_length=200, blank=True)
     email = models.CharField(max_length=320)
-    website = models.URLField()
+    website = models.URLField(blank=True)
     trendsetter = models.NullBooleanField()
     gallery = models.BooleanField()
-    avatar = models.URLField(max_length=200)
+    avatar = models.URLField(max_length=200, blank=True, null=True)
     user_since = models.DateField(auto_now_add=True)
-    location = models.CharField(max_length=200)
+    location = models.CharField(max_length=200, blank=True, null=True)
 #    fav_users = models.ManyToManyField('User')
 
 class Project(models.Model):

@@ -20,11 +20,11 @@ h1 {
 }
 
 a{
-    color:#4D1980;
+    color:#944DDB;
 }
 
 a:visited {
-    color:#4D1980;
+    color:#944DDB;
 }
 
 li {
@@ -33,15 +33,35 @@ li {
 
 #search {
     margin-right:5px;
-    margin-left:10px;
+    margin-left:5px;
     color:white;
     text-transform:uppercase;
+    display:inline;
 }
 
 #search input {
     background-color:white;
     border:solid 1px black;
     height:18px;
+    display:inline;
+}
+
+#search form{
+    display:inline;
+}
+
+#greeting{
+    margin-right:10px;
+    float:right;
+}
+
+#greeting p{
+    text-align:right;
+    display:inline;
+}
+
+#greeting a{
+    display:inline;
 }
 
 #banner {

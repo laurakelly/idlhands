@@ -16,6 +16,12 @@
 		</form>
 	</div>
 
+	{% if session_username %}
+	<div id="greeting">
+		<p>Hi, <a href="{{ session_username }}">{{ session_username }}!</a></p>
+		<a href="{{ logout_page }}">Logout</a>
+	</div>
+	{% endif %}
 
 <!--The banner is outside of the scope of the 960 grid system so it can extend the full width-->
 <div id="banner">
