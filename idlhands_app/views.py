@@ -25,11 +25,9 @@ def user_profile(request,username):
     avatar = user_profile.avatar
     location = user_profile.location
 
-    session_id = request.session.get('member_id')
-    session_user = User.objects.get(id=session_id)
-    if session_user.is_authenticated():
+    if request.user.is_authenticated():
         return render_to_response('profile.html',
-                {'session_username':session_user.username,'username':username,\
+                {'session_username':request.user.username,'username':username,\
                 'info':info, 'website':website, 'trendsetter':trendsetter,'gallery':gallery,\
                 'avatar':avatar, 'location':location})
     return render_to_response('profile.html',
@@ -64,7 +62,7 @@ def login_page(request):
             if user.is_active:
                 login(request, user)
                 request.session['member_id'] = user.id
-                return render_to_response('home.html')
+                return render_to_response('home.html', {'session_username':user.username})
         else:
             # Return an 'invalid login' error message.
             return render_to_response('login.html', {'invalid':True})
@@ -78,3 +76,15 @@ def logout_page(request):
         pass
     logout(request)
     return render_to_response('logged_out.html')
+
+def projects(request):
+    pass
+
+def users(request):
+    pass
+
+def upload(request):
+    if request.method == 'POST':
+    else:
+        render_to_response('upload.html')
+    pass

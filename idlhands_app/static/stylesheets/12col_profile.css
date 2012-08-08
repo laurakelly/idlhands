@@ -66,13 +66,21 @@ li {
 }
 
 #greeting a:hover{
+    color:#A0C544;
+}
 
+#greeting #logout{
+    display:inline;
 }
 
 #greeting #logout a{
     color:#A0C544;
     display:inline;
     text-decoration:none;
+}
+
+#greeting #logout a:hover{
+    color: #944DDB;
 }
 
 #banner {
