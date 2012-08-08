@@ -1,10 +1,11 @@
 from django.template import Context, loader
-from idlhands_app.models import UserProfile, Project, Image
+from idlhands_app.models import UserProfile, Project, Image, ImageForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
+from django import forms
 
 def home(request):
     if request.user.is_authenticated():
@@ -45,7 +46,7 @@ def project(request,username,id):
             'images':images, 'artist':username, 'tags':tags, 'media':media})
 
 def new_user(request, username, email, password):
-    banned = ['admin', 'login','logout','profiles', 'images', 'portfolios', 'new']
+    banned = ['admin', 'login','logout','profiles', 'images', 'portfolios', 'new','upload']
     if username in banned:
         pass
     user = User.objects.create_user(username, email, password)
@@ -84,7 +85,21 @@ def users(request):
     pass
 
 def upload(request):
-    if request.method == 'POST':
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            form = ImageForm(request.POST, user)
+            return HttpResponseRedirect('/success')
+        else:
+            return render_to_response('upload.html')
     else:
-        render_to_response('upload.html')
+        return render_to_response('login.html', {'log_in':True})
+
+def success(request):
     pass
+
+
+
+class ImageForm(forms.Form):
+    title = forms.CharField(max_length=140)
+    project = forms.ModelChoiceField(queryset=Project.objects.all(user=user))
+    artist =

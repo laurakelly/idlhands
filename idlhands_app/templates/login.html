@@ -4,6 +4,13 @@
 <head>
 	<title></title>
 </head>
+	<!--error message for users who tried to upload without logging in-->
+	<!--redirected from upload view-->
+	{% if log_in %}
+	<h1>You must log in to upload a piece</h1>
+	{% endif %}
+
+	<!--display message for invalid login-->
 	{% if invalid %}
 	<h1>Invalid username and/or password</h1>
 	{% endif %}

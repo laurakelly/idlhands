@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import forms
 
 class UserProfile(models.Model):
     # Represent User objects as usernames when called in the shell
@@ -26,7 +27,7 @@ class Project(models.Model):
         return self.title
 
     title = models.CharField(max_length=140)
-    artist = models.ForeignKey('UserProfile')
+    artist = models.ForeignKey(User)
     pub_date = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
     media = models.CharField(max_length=140)
@@ -39,14 +40,16 @@ class Image(models.Model):
         return self.title
 
     title = models.CharField(max_length=140)
-    artist = models.ForeignKey('UserProfile')
-    project = models.ForeignKey('Project')
+    artist = models.ForeignKey(User)
+    project = models.ForeignKey(Project)
     pub_date = models.DateTimeField(auto_now_add=True)
     tags = models.CharField(max_length=140)
     # url = models.URLField()
     image = models.ImageField(upload_to="images", width_field="width", height_field="height", null=True)
     width = models.IntegerField(null=True)
     height = models.IntegerField(null=True)
+
+
 
 # TODO: Add votes after Projects feature is working
 
