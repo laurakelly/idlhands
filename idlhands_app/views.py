@@ -1,5 +1,5 @@
 from django.template import Context, loader
-from idlhands_app.models import UserProfile, Project, Image, ImageForm
+from idlhands_app.models import UserProfile, Project, Image#, ImageForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -46,7 +46,8 @@ def project(request,username,id):
             'images':images, 'artist':username, 'tags':tags, 'media':media})
 
 def new_user(request, username, email, password):
-    banned = ['admin', 'login','logout','profiles', 'images', 'portfolios', 'new','upload']
+    banned = ['admin', 'login','logout','profiles', 'images', 'portfolios', 'portfolio' 'new','upload', 'about',\
+              'series','signup', 'home', 'profile']
     if username in banned:
         pass
     user = User.objects.create_user(username, email, password)
@@ -78,28 +79,65 @@ def logout_page(request):
     logout(request)
     return render_to_response('logged_out.html')
 
-def projects(request):
+def project(request):
     pass
 
 def users(request):
     pass
 
-def upload(request):
+def portfolio(request):
     if request.user.is_authenticated():
-        if request.method == 'POST':
-            form = ImageForm(request.POST, user)
+        user = request.user
+        user_profile = user.get_profile()
+        username = user.username
+        info = user_profile.info
+        website = user_profile.website
+        trendsetter = user_profile.trendsetter
+        gallery = user_profile.trendsetter
+        avatar = user_profile.avatar
+        location = user_profile.location
+        projects = Project.objects.filter(user=user.id)
+        return render_to_response('portfolio.html',
+                {'session_username':request.user.username,'username':username,\
+                'info':info, 'website':website, 'trendsetter':trendsetter,'gallery':gallery,\
+                'avatar':avatar, 'location':location})
+    else:
+        return render_to_response('login.html', {'portfolio':True})
+
+def new_project(request):
+    if request.user.is_authenticated():
+        if request.method == "POST":
+#            form = ImageForm(request.POST, request.user)
             return HttpResponseRedirect('/success')
         else:
-            return render_to_response('upload.html')
+            return render_to_response('new_project.html')
     else:
-        return render_to_response('login.html', {'log_in':True})
+        return render_to_response('login.html', {'project':True})
+
+def signup(request):
+    if request.method == "POST":
+#        form = SignupForm(request.POST, request.user)
+        return render_to_response('signup_success.html')
+    else:
+        return render_to_response('signup.html')
+
+
+#def upload(request):
+#    if request.user.is_authenticated():
+#        if request.method == 'POST':
+#            form = ImageForm(request.POST, request.user)
+#            return HttpResponseRedirect('/success')
+#        else:
+#            return render_to_response('upload.html')
+#    else:
+#        return render_to_response('login.html', {'log_in':True})
 
 def success(request):
     pass
 
 
 
-class ImageForm(forms.Form):
-    title = forms.CharField(max_length=140)
-    project = forms.ModelChoiceField(queryset=Project.objects.all(user=user))
-    artist =
+#class ImageForm(forms.Form):
+#    title = forms.CharField(max_length=140)
+#    project = forms.ModelChoiceField(queryset=Project.objects.all(user=user))
+#    artist =

@@ -73,10 +73,37 @@ li {
     display:inline;
 }
 
+#greeting #login{
+    display:inline;
+}
+
+#greeting #signup{
+    display:inline;
+}
+
 #greeting #logout a{
     color:#A0C544;
     display:inline;
     text-decoration:none;
+}
+
+#greeting #login a{
+    color:#A0C544;
+    display:inline;
+    text-decoration:none;
+}
+
+#greeting #login a:hover{
+    color: #944DDB;
+}
+
+#greeting #signup a{
+    color:#944DDB;
+    display:inline;
+}
+
+#greeting #signup a:hover{
+    color:#A0C544;
 }
 
 #greeting #logout a:hover{

@@ -24,6 +24,12 @@
 </div>
 {% endif %}
 
+{% if not session_username %}
+<div id="greeting">
+	<div id="signup"><a href="{% url signup %}">Sign Up!</a></div>
+	<div id="login"><a href="{% url login %}">Login</a></div>
+</div>
+{% endif %}
 
 <!--The banner is outside of the scope of the 960 grid system so it can extend the full width-->
 <div id="banner">
@@ -40,9 +46,8 @@
 		<div class="grid_12">
 			<div id="nav">
 				<a href="{% url users %}">Users</a>
-				<a href="{% url projects %}">Projects</a>
-				<a href="{% url upload">Post</a>
-				<a href="{% url login %}">Login</a>
+				<a href="{% url project %}">Projects</a>
+				<a href="{% url 'portfolio' %}">Portfolio</a>
 				<a href="{% url home %}">Home</a>
 			</div>
 		</div>

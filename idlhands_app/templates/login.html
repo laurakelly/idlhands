@@ -4,6 +4,16 @@
 <head>
 	<title></title>
 </head>
+	<!--error message if user who isn't logged in tries to edit portfolio-->
+	{% if portfolio %}
+	<h1>You must log in to edit your portfolio</h1>
+	{% endif %}
+
+	<!--error message if user who isn't logged in tries to create new project-->
+	{% if project %}
+	<h1>You must log in to create a new project</h1>
+	{% endif %}
+
 	<!--error message for users who tried to upload without logging in-->
 	<!--redirected from upload view-->
 	{% if log_in %}
