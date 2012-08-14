@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django import forms
+from boto import upload_boto
 
 def home(request):
     if request.user.is_authenticated():
@@ -108,6 +109,12 @@ def new_project(request):
     if request.user.is_authenticated():
         if request.method == "POST":
 #            form = ImageForm(request.POST, request.user)
+            artist = request.user
+            project = request.project
+            tags = request.POST['tags']
+            title = request.POST['title']
+            new_image = Image(title, artist, project,tags)
+            upload_boto(request.user, new_image)
             return HttpResponseRedirect('/success')
         else:
             return render_to_response('new_project.html')
