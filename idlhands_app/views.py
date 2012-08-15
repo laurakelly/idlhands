@@ -1,11 +1,12 @@
 from django.template import Context, loader
-from idlhands_app.models import UserProfile, Project, Image#, ImageForm
+from idlhands_app.models import UserProfile, Project, Image
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django import forms
+from settings import MEDIA_ROOT
 # TODO: fix boto script to import properly
 #from boto_script import upload_boto
 from uploader import handle_uploaded_file
@@ -110,21 +111,33 @@ def portfolio(request):
 def new_project(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-            form  = ImageForm(request.POST, request.user)
+            form = ImageForm(request.POST, request.FILES)
+            # if form.is_valid():
+            project_title = request.POST['project_title']
+            project_media = request.POST['project_media']
+            project_tags = request.POST['project_tags']
             artist = request.user
-            image = request.POST['image_path']
-#            project = request.project
-            tags = request.POST['tags']
-            title = request.POST['title']
-            media = request.POST['media']
-            new_image = Image(title, artist, project,tags)
 
-            # TODO: fix boto upload
-#            upload_boto(request.user, new_image)
+            # Create new project in database
+            new_project = Project(title=project_title, media=project_media, tags=project_tags, \
+                artist=artist)
+            new_project.save()
+
+            image_title = request.POST['image_title']
+            image_tags = request.POST['image_tags']
+            save_file(request.FILES['file'])
+
+            # Create new project in database
+            new_image = Image(title=image_title, tags=image_tags, project=new_project,\
+                artist=artist)
+            new_image.save()
+
             return HttpResponseRedirect('/success')
         else:
-            return render_to_response('new_project.html')
+            form = ImageForm()
+            return render_to_response('new_project.html', {'form': form})
     else:
+        print "here2"
         return render_to_response('login.html', {'project':True})
 
 def signup(request):
@@ -134,45 +147,25 @@ def signup(request):
     else:
         return render_to_response('signup.html')
 
-
-def upload(request):
-    if request.user.is_authenticated():
-        if request.method == 'POST':
-            form = ImageForm(request.POST, request.FILES)
-            if form.is_valid():
-                handle_uploaded_file(request.FILES['file'])
-                new_image = Image("artist":request.user, "")
-                return HttpResponseRedirect('/success')
-            else:
-                # TODO: show and process form.errors
-                pass
-        else:
-            form = ImageForm()
-            return render_to_response('upload.html', {'form': form})
-    else:
-        return render_to_response('login.html', {'log_in':True})
-
 def success(request):
-    pass
-
+    return render_to_response("success.html")
 
 
 class ImageForm(forms.Form):
-    title = forms.CharField(max_length=140)
-    project = None
-    artist = None
-    file = forms.ImageField(upload_to="images", width_field="width", height_field="height", null=True)
-    tags = forms.CharField(max_length=140)
+    file = forms.ImageField()
+    project_title = forms.CharField(max_length=140)
+    project_media = forms.CharField(max_length=140)
+    project_tags = forms.CharField(max_length=140)
+    image_title = forms.CharField(max_length=140)
+    image_tags = forms.CharField(max_length=140)
 
-class ProfileForm(forms.Form):
-    info = forms.TextField(max_length=200, blank=True)
-    email = forms. EmailField()
-    website = forms.URLField(blank=True)
-    trendsetter = forms.NullBooleanField()
-    location = forms.CharField(max_length=200, blank=True, null=True)
 
-class RegistrationForm(forms.Form):
-    username = forms.CharField(max_length=90)
-    email = forms. EmailField()
-    password = forms.Password(max_length=90)
 
+def save_file(file):
+    ''' Little helper to save a file
+    '''
+    filename = file._get_name()
+    fd = open('%s/%s' % (MEDIA_ROOT,str(filename)), 'wb')
+    for chunk in file.chunks():
+        fd.write(chunk)
+    fd.close()
