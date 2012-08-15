@@ -110,7 +110,7 @@ def portfolio(request):
 def new_project(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-            form = ImageForm(request.POST, request.user)
+            form  = ImageForm(request.POST, request.user)
             artist = request.user
             image = request.POST['image_path']
 #            project = request.project
