@@ -1,12 +1,13 @@
+#!/bin/env python
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
-from boto_cred import access_id, secret_key
 from django.contrib.auth.models import User, Image
+import os
 
 def upload_boto(uid, image):
     # Establish S3 connection
-    access_id = access_id()
-    secret_key = secret_key()
+    access_id=os.environ['S3_ACCESS_ID']
+    secret_key=os.environ['S3_SECRET_KEY']
     conn = S3Connection(access_id, secret_key)
 
     # S3 index is username concatenated with the number of images a user has + 1

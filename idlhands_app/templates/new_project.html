@@ -2,27 +2,26 @@
 		"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<script src="../static/js/jquery.min.js" type="text/javascript"></script>
-	<script src="../static/js/ajaxupload.js" type="text/javascript"></script>
+	<script src="../static/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+	<script src="../static/js/fileuploader.js" type="text/javascript"></script>
+	<!--<link rel=StyleSheet href="../static/stylesheets/12col_upload.css" type="text/css">-->
 	<script>
 		$(document).ready(function(){
-
-		var thumb = $('img#thumb');
-
-		new AjaxUpload('imageUpload', {
-		action: $('form#newHotnessForm').attr('action'),
-		name: 'image',
-		onSubmit: function(file, extension) {
-		$('div.preview').addClass('loading');
-		},
-		onComplete: function(file, response) {
-		thumb.load(function(){
-		$('div.preview').removeClass('loading');
-		thumb.unbind();
-		});
-		thumb.attr('src', response);
-		}
-		});
+			var thumb = $('img#thumb');
+			new qq.FileUploader('imageUpload', {
+				action: $('form#newHotnessForm').attr('action'),
+				name: 'image',
+				onSubmit: function(file, extension) {
+					$('div.preview').addClass('loading');
+					},
+				onComplete: function(file, response) {
+					thumb.load(function(){
+						$('div.preview').removeClass('loading');
+						thumb.unbind();
+						});
+					thumb.attr('src', response);
+					}
+			});
 		});
 	</script>
 	<title>New Series</title>
@@ -31,15 +30,15 @@
 <div class="upload">
 	<div class="preview">
 		<div class="preview">
-			<img id="thumb" width="100px" height="100px" src="../static/uploads/images/idlhands_logo.png">
+			<img id="thumb" width="100px" height="100px" src="../static/logos/arrow_green.png">
 		</div>
 	</div>
 
-	<form id="newHotnessForm" action="../static/uploads/images">
-		<input id="imageUpload" class="" type="file" size="20">
-		Series Title<input type="text" maxlength="140"><br>
-		Media<input type="text" maxlength="140" default="separate by commas"><br>
-		Tags<input type="text" maxlength="140"><br>
+	<form id="newHotnessForm" method="POST">
+		<input id="imageUpload" enctype="multipart/form-data" class="" type="file" size="20" name="image_path"><br>
+		Project Title<input type="text" maxlength="140" name="title"><br>
+		Media<input type="text" maxlength="140" default="separate by commas" name="media"><br>
+		Tags<input type="text" maxlength="140" name="tags"><br>
 		<button class="button" type="submit">Save</button>
 	</form>
 </div>

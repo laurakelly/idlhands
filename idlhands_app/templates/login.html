@@ -2,35 +2,90 @@
 		"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title></title>
+	<link rel="SHORTCUT ICON" href="../static/logos/arrow_green.png"/>
+	<link href='http://fonts.googleapis.com/css?family=Istok+Web:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+	<link rel=StyleSheet href="../static/stylesheets/960_12_col.css">
+	<link rel=StyleSheet href="../static/stylesheets/12col_login.css" type="text/css">
+	<title>Login</title>
 </head>
-	<!--error message if user who isn't logged in tries to edit portfolio-->
-	{% if portfolio %}
-	<h1>You must log in to edit your portfolio</h1>
-	{% endif %}
-
-	<!--error message if user who isn't logged in tries to create new project-->
-	{% if project %}
-	<h1>You must log in to create a new project</h1>
-	{% endif %}
-
-	<!--error message for users who tried to upload without logging in-->
-	<!--redirected from upload view-->
-	{% if log_in %}
-	<h1>You must log in to upload a piece</h1>
-	{% endif %}
-
-	<!--display message for invalid login-->
-	{% if invalid %}
-	<h1>Invalid username and/or password</h1>
-	{% endif %}
-	<form method="POST">
-		Email<input type="text" name="username"><br>
-		Password<input type="password" name="password">
-		<input type="submit">
-	</form>
-
 <body>
+	<!--search is outside 960 grid system so it aligns with left edge of screen-->
+	<div id="search">
+		<form>
+			<input type=text name="search"> Search
+		</form>
+	</div>
 
+	{% if session_username %}
+	<div id="greeting">
+		<p>Hi, <a href="{{ session_username }}">{{ session_username }}!</a></p>
+		<div id="logout"><a href="{% url logout %}">Logout</a></div>
+	</div>
+	{% endif %}
+
+	{% if not session_username %}
+	<div id="greeting">
+		<div id="signup"><a href="{% url signup %}">Sign Up!</a></div>
+		<div id="login"><a href="{% url login %}">Login</a></div>
+	</div>
+	{% endif %}
+
+	<!--The banner is outside of the scope of the 960 grid system so it can extend the full width-->
+	<div id="banner">
+		<div class="container_12">
+			<div class="grid_12">
+				<h1><img id="logo" src="static/logos/arrow.png" width=70px height=70px/>IDL HANDS</h1>
+			</div>
+		</div>
+	</div>
+
+	<!--The nav part of the banner is outside of the scope of the 960 grid system so it can extend the full width-->
+	<div id="nav_extra_space">
+		<div class="container_12">
+			<div class="grid_12">
+				<div id="nav">
+					<a href="{% url users %}">Users</a>
+					<a href="{% url project %}">Projects</a>
+					<a href="{% url portfolio%}">Portfolio</a>
+					<a href="{% url home %}">Home</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!--begin 960 grid system-->
+<div class="container_12">
+	<div class="container_12 messages">
+		<!--error message if user who isn't logged in tries to edit portfolio-->
+		{% if portfolio %}
+		<h2>You must log in to edit your portfolio</h2>
+		{% endif %}
+
+		<!--error message if user who isn't logged in tries to create new project-->
+		{% if project %}
+		<h2>You must log in to create a new project</h2>
+		{% endif %}
+
+		<!--error message for users who tried to upload without logging in-->
+		<!--redirected from upload view-->
+		{% if log_in %}
+		<h2>You must log in to upload a piece</h2>
+		{% endif %}
+
+		<!--display message for invalid login-->
+		{% if invalid %}
+		<h2>Invalid username and/or password</h2>
+		{% endif %}
+	</div>
+	<div class="grid_5 prefix_4">
+		<div id="login">
+			<form method="POST">
+				Username <input type="text" name="username"><br>
+				Password <input type="password" name="password"><br>
+				<div id="submit"><input type="submit" value="submit"></div>
+			</form>
+		</div>
+	</div>
+</div>
 </body>
 </html>

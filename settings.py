@@ -86,7 +86,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'n)u^bo%e82va9m6(@wr-v0_k&+1vorz_5fi7&=9pis$^^2x7#-'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -98,7 +98,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -146,3 +146,15 @@ LOGGING = {
 }
 
 AUTH_PROFILE_MODULE = 'idlhands_app.UserProfile'
+
+# S3 access information
+S3_ACCESS_ID = os.environ['S3_ACCESS_ID']
+S3_SECRET_KEY = os.environ['S3_SECRET_KEY']
+
+# Specifying S3 as photo storage
+DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Storage'
+
+try:
+    from local_settings import *
+except ImportError, e:
+    pass

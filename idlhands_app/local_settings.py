@@ -1,0 +1,1 @@
+DEFAULT_FILE_STORAGE = "/home/norby/Dropbox/IDLHANDS/idlhands/idlhands_app/static"

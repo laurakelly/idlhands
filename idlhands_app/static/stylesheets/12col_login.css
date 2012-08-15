@@ -1,0 +1,170 @@
+body {
+    min-width: 960px;
+    background-image:url("../design/dirty_old_shirt.png");
+    margin-left:0px;
+    margin-right:0px;
+    font-family:Consolas,'Lucida Console','DejaVu Sans Mono',monospace;
+    color: #E1E1E1;
+}
+
+h1 {
+    font-family: helvetica,arial;
+    font-weight: bold;
+    text-align:right;
+    color: #A0C544;
+    background-color:#323232;
+    margin-top:0px;
+    margin-bottom:0px;
+    font-size: 90px;
+    text-align:right;
+}
+
+
+a{
+    color:#944DDB;
+}
+
+a:visited {
+    color:#944DDB;
+}
+
+li {
+    list-style:none;
+}
+
+#search {
+    margin-right:5px;
+    margin-left:5px;
+    color:white;
+    text-transform:uppercase;
+    display:inline;
+}
+
+#search input {
+    background-color:white;
+    border:solid 1px black;
+    height:18px;
+    display:inline;
+}
+
+#search form{
+    display:inline;
+}
+
+#greeting{
+    margin-right:10px;
+    float:right;
+}
+
+#greeting p{
+    text-align:right;
+    display:inline;
+}
+
+#greeting a{
+    display:inline;
+}
+
+#greeting a:hover{
+    color:#A0C544;
+}
+
+#greeting #logout{
+    display:inline;
+}
+
+#greeting #login{
+    display:inline;
+}
+
+#greeting #signup{
+    display:inline;
+}
+
+#greeting #logout a{
+    color:#A0C544;
+    display:inline;
+    text-decoration:none;
+}
+
+#greeting #login a{
+    color:#A0C544;
+    display:inline;
+    text-decoration:none;
+}
+
+#greeting #login a:hover{
+    color: #944DDB;
+}
+
+#greeting #signup a{
+    color:#944DDB;
+    display:inline;
+}
+
+#greeting #signup a:hover{
+    color:#A0C544;
+}
+
+#greeting #logout a:hover{
+    color: #944DDB;
+}
+
+#banner {
+    margin-top:10px;
+    background-color:#323232;
+}
+
+#logo {
+    margin-right:30px;
+    margin-bottom:-1px;
+}
+
+#nav {
+    margin:0px;
+    background-color: #4B4B4B;
+    height:30px;
+}
+
+#nav a {
+    margin-right:10px;
+    padding-right:10px;
+    padding-left:10px;
+    float:right;
+    background-color:#4B4B4B;
+    color: #FF9933;
+    text-decoration:none;
+    text-transform:uppercase;
+    text-align:center;
+    line-height: 30px;
+    display: block;
+
+}
+
+#nav_extra_space {
+    background-color:#4B4B4B;
+    margin-bottom:40px;
+}
+
+#nav a:visited {
+    background-color:#4B4B4B;
+}
+
+#nav a:hover{
+    color:#1E1E1E;
+    background-color:#E1E1E1;
+}
+
+.messages {
+    text-align:center;
+}
+
+#login input {
+    margin-bottom:5px;
+}
+
+#login #submit {
+    display:inline;
+    float:right;
+    margin-right:55px;
+}

@@ -2,11 +2,13 @@ from django.template import Context, loader
 from idlhands_app.models import UserProfile, Project, Image#, ImageForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django import forms
-from boto import upload_boto
+# TODO: fix boto script to import properly
+#from boto_script import upload_boto
+from uploader import handle_uploaded_file
 
 def home(request):
     if request.user.is_authenticated():
@@ -97,7 +99,7 @@ def portfolio(request):
         gallery = user_profile.trendsetter
         avatar = user_profile.avatar
         location = user_profile.location
-        projects = Project.objects.filter(user=user.id)
+        projects = Project.objects.filter(artist=user.id)
         return render_to_response('portfolio.html',
                 {'session_username':request.user.username,'username':username,\
                 'info':info, 'website':website, 'trendsetter':trendsetter,'gallery':gallery,\
@@ -108,13 +110,17 @@ def portfolio(request):
 def new_project(request):
     if request.user.is_authenticated():
         if request.method == "POST":
-#            form = ImageForm(request.POST, request.user)
+            form = ImageForm(request.POST, request.user)
             artist = request.user
-            project = request.project
+            image = request.POST['image_path']
+#            project = request.project
             tags = request.POST['tags']
             title = request.POST['title']
+            media = request.POST['media']
             new_image = Image(title, artist, project,tags)
-            upload_boto(request.user, new_image)
+
+            # TODO: fix boto upload
+#            upload_boto(request.user, new_image)
             return HttpResponseRedirect('/success')
         else:
             return render_to_response('new_project.html')
@@ -129,22 +135,44 @@ def signup(request):
         return render_to_response('signup.html')
 
 
-#def upload(request):
-#    if request.user.is_authenticated():
-#        if request.method == 'POST':
-#            form = ImageForm(request.POST, request.user)
-#            return HttpResponseRedirect('/success')
-#        else:
-#            return render_to_response('upload.html')
-#    else:
-#        return render_to_response('login.html', {'log_in':True})
+def upload(request):
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            form = ImageForm(request.POST, request.FILES)
+            if form.is_valid():
+                handle_uploaded_file(request.FILES['file'])
+                new_image = Image("artist":request.user, "")
+                return HttpResponseRedirect('/success')
+            else:
+                # TODO: show and process form.errors
+                pass
+        else:
+            form = ImageForm()
+            return render_to_response('upload.html', {'form': form})
+    else:
+        return render_to_response('login.html', {'log_in':True})
 
 def success(request):
     pass
 
 
 
-#class ImageForm(forms.Form):
-#    title = forms.CharField(max_length=140)
-#    project = forms.ModelChoiceField(queryset=Project.objects.all(user=user))
-#    artist =
+class ImageForm(forms.Form):
+    title = forms.CharField(max_length=140)
+    project = None
+    artist = None
+    file = forms.ImageField(upload_to="images", width_field="width", height_field="height", null=True)
+    tags = forms.CharField(max_length=140)
+
+class ProfileForm(forms.Form):
+    info = forms.TextField(max_length=200, blank=True)
+    email = forms. EmailField()
+    website = forms.URLField(blank=True)
+    trendsetter = forms.NullBooleanField()
+    location = forms.CharField(max_length=200, blank=True, null=True)
+
+class RegistrationForm(forms.Form):
+    username = forms.CharField(max_length=90)
+    email = forms. EmailField()
+    password = forms.Password(max_length=90)
+
